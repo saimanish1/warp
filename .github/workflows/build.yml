@@ -17,6 +17,13 @@ jobs:
         with:
           target_os: windows
           is_self_hosted: false
+          cache_key: byok-v2
+
+      - name: Force rebuild of aws-lc-sys with jent disabled
+        shell: pwsh
+        env:
+          AWS_LC_SYS_NO_JENT_HARDWARE: 1
+        run: cargo clean -p aws-lc-sys
 
       - name: Build Warp OSS
         shell: pwsh
