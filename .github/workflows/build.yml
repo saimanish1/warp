@@ -1,0 +1,31 @@
+name: Build Warp (BYOK)
+
+on:
+  push:
+    branches: [byok-patch]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare_environment
+        with:
+          target_os: windows
+          is_self_hosted: false
+
+      - name: Build Warp OSS
+        shell: pwsh
+        env:
+          AWS_LC_SYS_NO_JENT_HARDWARE: 1
+        run: cargo build -p warp --bin warp-oss
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: warp-oss-windows
+          path: target/debug/warp-oss.exe
