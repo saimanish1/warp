@@ -47,18 +47,18 @@ jobs:
       - name: Build Warp binary
         shell: bash
         env:
-          CARGO_BIN_NAME: local
-          WARP_APP_NAME: WarpLocal
+          CARGO_BIN_NAME: oss
+          WARP_APP_NAME: WarpOss
           CARGO_FULL_PROFILE: rltoda
         run: |
           cargo build -p warp \
             --profile rltoda \
-            --bin warp \
-            --features "release_bundle,crash_reporting,gui" \
+            --bin warp-oss \
+            --features "release_bundle,gui" \
             --target x86_64-pc-windows-msvc
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: warp-windows-x64
-          path: target/x86_64-pc-windows-msvc/rltoda/warp.exe
+          path: target/x86_64-pc-windows-msvc/rltoda/warp-oss.exe
