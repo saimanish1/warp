@@ -61,4 +61,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: warp-windows-x64
-          path: target/x86_64-pc-windows-msvc/rltoda/warp-oss.exe
+          path: |
+            target/x86_64-pc-windows-msvc/rltoda/warp-oss.exe
+            target/x86_64-pc-windows-msvc/rltoda/conpty.dll
+            target/x86_64-pc-windows-msvc/rltoda/dxcompiler.dll
+            target/x86_64-pc-windows-msvc/rltoda/dxil.dll
+            target/x86_64-pc-windows-msvc/rltoda/x64/OpenConsole.exe
